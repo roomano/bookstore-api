@@ -11,7 +11,7 @@ public class Livro implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer idLivro;
     private String titulo;
     private String nome_autor;
     private String texto;
@@ -25,20 +25,20 @@ public class Livro implements Serializable {
         super();
     }
 
-    public Livro(Integer id, String titulo, String nome_autor, String texto, Categoria categoria) {
-        this.id = id;
+    public Livro(Integer idLivro, String titulo, String nome_autor, String texto, Categoria categoria) {
+        this.idLivro = idLivro;
         this.titulo = titulo;
         this.nome_autor = nome_autor;
         this.texto = texto;
         this.categoria = categoria;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getIdLivro() {
+        return idLivro;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdLivro(Integer id) {
+        this.idLivro = id;
     }
 
     public String getTitulo() {
@@ -82,20 +82,20 @@ public class Livro implements Serializable {
         if (getClass() != o.getClass())
             return false;
         Livro other = (Livro) o;
-        if (id == null) {
-            if (other.id != null)
+        if (idLivro == null) {
+            if (other.idLivro != null)
                 return false;
-        } else if (!id.equals(other.id))
+        } else if (!idLivro.equals(other.idLivro))
             return false;
         return true;
     }
 
     @Override
     public int hashCode() {
-        //return Objects.hash(getId());
+        //return Objects.hash(getIdCategoria());
         final int prime = 31;
         int result =1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        result = prime * result + ((idLivro == null) ? 0 : idLivro.hashCode());
         return result;
     }
 

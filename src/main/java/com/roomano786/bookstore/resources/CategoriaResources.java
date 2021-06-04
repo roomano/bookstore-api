@@ -5,7 +5,6 @@ import com.roomano786.bookstore.dtos.CategoriaDTO;
 import com.roomano786.bookstore.service.CategoriaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -34,7 +33,7 @@ public class CategoriaResources {
     @PostMapping
     public ResponseEntity<Categoria> create(@RequestBody Categoria obj) {
         obj = service.create(obj);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getIdCategoria()).toUri();
         return ResponseEntity.created(uri).build();
 
     }

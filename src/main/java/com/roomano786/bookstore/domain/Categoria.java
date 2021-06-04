@@ -4,7 +4,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Entity
 public class Categoria implements Serializable {
@@ -12,7 +11,7 @@ public class Categoria implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer idCategoria;
     private String nome;
     private String descricao;
 
@@ -23,19 +22,19 @@ public class Categoria implements Serializable {
         super();
     }
 
-    public Categoria(Integer id, String nome, String descricao) {
+    public Categoria(Integer idCategoria, String nome, String descricao) {
         super();
-        this.id = id;
+        this.idCategoria = idCategoria;
         this.nome = nome;
         this.descricao = descricao;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getIdCategoria() {
+        return idCategoria;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdCategoria(Integer id) {
+        this.idCategoria = id;
     }
 
     public String getNome() {
@@ -67,7 +66,7 @@ public class Categoria implements Serializable {
         if (this == o) return true;
         if (!(o instanceof Categoria)) return false;
         Categoria categoria = (Categoria) o;
-        return getId().equals(categoria.getId());
+        return getIdCategoria().equals(categoria.getIdCategoria());
     }
     */
     @Override
@@ -79,20 +78,20 @@ public class Categoria implements Serializable {
         if (getClass() != o.getClass())
             return false;
         Categoria other = (Categoria) o;
-        if (id == null) {
-            if (other.id != null)
+        if (idCategoria == null) {
+            if (other.idCategoria != null)
                 return false;
-        } else if (!id.equals(other.id))
+        } else if (!idCategoria.equals(other.idCategoria))
             return false;
         return true;
    }
 
     @Override
     public int hashCode() {
-        //return Objects.hash(getId());
+        //return Objects.hash(getIdCategoria());
         final int prime = 31;
         int result =1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
+        result = prime * result + ((idCategoria == null) ? 0 : idCategoria.hashCode());
         return result;
     }
 }
