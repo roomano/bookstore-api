@@ -18,7 +18,6 @@ public class Livro implements Serializable {
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
     public Livro() {
