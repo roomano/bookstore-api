@@ -1,6 +1,7 @@
 package com.roomano786.bookstore.service;
 
 import com.roomano786.bookstore.domain.Categoria;
+import com.roomano786.bookstore.dtos.CategoriaDTO;
 import com.roomano786.bookstore.repositories.CategoriaRepository;
 import com.roomano786.bookstore.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,13 @@ public class CategoriaService {
     }
     public Categoria create(Categoria obj) {
         obj.setId(null);
+        return repository.save(obj);
+    }
+
+    public Categoria update(Integer id, CategoriaDTO objDto) {
+        Categoria obj = findById(id);
+        obj.setNome(objDto.getNome());
+        obj.setDescricao(objDto.getDescricao());
         return repository.save(obj);
     }
 }
