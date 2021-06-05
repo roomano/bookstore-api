@@ -1,5 +1,6 @@
 package com.roomano786.bookstore.service;
 
+import com.roomano786.bookstore.domain.Categoria;
 import com.roomano786.bookstore.domain.Livro;
 import com.roomano786.bookstore.repositories.LivroRepository;
 import com.roomano786.bookstore.service.exceptions.ObjectNotFoundException;
@@ -37,5 +38,12 @@ public class LivroService {
         newObj.setTitulo(obj.getTitulo());
         newObj.setNome_autor(obj.getNome_autor());
         newObj.setTexto(obj.getTexto());
+    }
+
+    public Livro create(Integer idCategoria, Livro obj) {
+        obj.setIdLivro(null);
+        Categoria categoria = categoriaService.findById(idCategoria);
+        obj.setCategoria(categoria);
+        return repository.save(obj);
     }
 }
