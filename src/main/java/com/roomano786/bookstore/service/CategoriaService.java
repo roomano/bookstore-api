@@ -3,6 +3,7 @@ package com.roomano786.bookstore.service;
 import com.roomano786.bookstore.domain.Categoria;
 import com.roomano786.bookstore.dtos.CategoriaDTO;
 import com.roomano786.bookstore.repositories.CategoriaRepository;
+import com.roomano786.bookstore.service.exceptions.DataIntegrityViolationException;
 import com.roomano786.bookstore.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,6 +39,10 @@ public class CategoriaService {
 
     public void delete(Integer id) {
         findById(id);
-        repository.deleteById(id);
+        try {
+            repository.deleteById(id);
+        } catch (org.springframework.dao.DataIntegrityViolationException e) {
+            throw new DataIntegrityViolationException("Categoria não pode ser apagada! Possui livros associados");
+        }
     }
 }
