@@ -3,15 +3,18 @@ package com.roomano786.bookstore.resources;
 import com.roomano786.bookstore.domain.Livro;
 import com.roomano786.bookstore.dtos.LivroDTO;
 import com.roomano786.bookstore.service.LivroService;
+import jdk.jfr.Description;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping(value = "/livros")
 public class LivroResources {
@@ -33,19 +36,19 @@ public class LivroResources {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Livro> update(@PathVariable Integer id, @RequestBody Livro obj) {
+    public ResponseEntity<Livro> update(@PathVariable Integer id,@Valid  @RequestBody Livro obj) {
         Livro newObj = service.update(id, obj);
         return ResponseEntity.ok().body(newObj);
     }
 
     @PatchMapping(value = "/{id}")
-    public ResponseEntity<Livro> updatePatch(@PathVariable Integer id, @RequestBody Livro obj) {
+    public ResponseEntity<Livro> updatePatch(@PathVariable Integer id,@Valid @RequestBody Livro obj) {
         Livro newObj = service.update(id, obj);
         return ResponseEntity.ok().body(newObj);
     }
 
     @PostMapping
-    public ResponseEntity<Livro> create(@RequestParam(value = "categoria", defaultValue = "0") Integer idCategoria, @RequestBody Livro obj) {
+    public ResponseEntity<Livro> create( @RequestParam(value = "categoria", defaultValue = "0") Integer idCategoria,@Valid @RequestBody Livro obj) {
         Livro newObj = service.create(idCategoria, obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/livros/{id}").buildAndExpand(newObj.getIdLivro()).toUri();
         return ResponseEntity.created(uri).build();

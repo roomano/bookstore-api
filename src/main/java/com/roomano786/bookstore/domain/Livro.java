@@ -1,8 +1,10 @@
 package com.roomano786.bookstore.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
 @Entity
@@ -12,8 +14,17 @@ public class Livro implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idLivro;
+
+    @NotEmpty(message = "O campo TÍTULO é requerido")
+    @Length(min = 4, max = 50, message = "O campo TÍTULO de conter entre 4 a 50 caracteres")
     private String titulo;
+
+    @NotEmpty(message = "O campo NOME DO AUTOR é requerido")
+    @Length(min = 4, max = 50, message = "O campo NOME DO AUTOR de conter entre 4 a 50 caracteres")
     private String nome_autor;
+
+    @NotEmpty(message = "O campo TEXTO é requerido")
+    @Length(min = 10, max = 1000, message = "O campo TEXTO de conter entre 10 a 1000 caracteres")
     private String texto;
 
     @JsonIgnore
